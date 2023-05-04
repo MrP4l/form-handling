@@ -1,0 +1,102 @@
+html {
+    scroll-behavior: smooth;
+  }
+
+#firstContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+}
+
+#firstBackgroundImage {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index: -1;
+    background-image: url('images/ronaldo-de-oliveira-qV3-yE6kovQ-unsplash.jpg');
+}
+
+#mainContainer {
+    display: flex;
+    flex-wrap: wrap;
+    height: 40%;
+    width: 50%;
+}
+
+#titleContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: fit-content;
+    width: 100%;
+}
+
+#buttonContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 45%;
+    width: 100%;
+}
+
+#buttonContainer > button {
+    margin: 20px;
+}
+
+/*-----------secondContainer-----------------*/
+#secondContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+}
+
+#secondBackgroundImage {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index: -1;
+    background-image: url('images/maria-teneva-9ZjMjwIBsGQ-unsplash.jpg');
+}
+
+#formContainer {
+    display: flex;
+    flex-wrap: wrap;
+    height: fit-content;
+    width: 35%;
+    padding: 20px;
+    border-radius: 30px;
+    color: white;
+    background-color: rgb(33, 37, 41);
+    -webkit-box-shadow: 1px 1px 35px 10px #000000; 
+    box-shadow: 1px 1px 35px 10px #000000;
+}
+
+.form-control {
+    background-color: rgb(52, 58, 64);
+    color: white;
+}
+
+.form-control:focus {
+    background-color: rgb(66, 71, 75);
+    color: inherit;
+    content: " ";
+}
+/*Delete the placeholder with js*/
+.form-control::placeholder {
+    color: white
+}
+
+.form-select {
+    background-color: rgb(52, 58, 64);
+    color: white;
+}
+
+
