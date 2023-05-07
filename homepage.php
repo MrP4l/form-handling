@@ -10,7 +10,6 @@
         <link rel="stylesheet" href="homepage.css">
     </head>
     <body>
-
     
     <div id="firstContainer">
         <div id="firstBackgroundImage"></div>
@@ -24,45 +23,49 @@
             </div>
         </div>
     </div> 
+
     <div id="secondContainer">
         <div id="secondBackgroundImage"></div>
         <div id="formContainer">
-            <form class="row g-3">
+            <form action="formHandler.php" method="post" class="row g-3 has-validation" id="form">
                 <div class="col-md-6">
                   <label for="name" class="form-label">Name</label>
-                  <input type="text" class="form-control" id="name" placeholder="Jesse" required>
+                  <input type="text" name="name" class="form-control" id="name" placeholder="Jesse" required>
                 </div>
                 <div class="col-md-6">
                   <label for="surname" class="form-label">Surname</label>
-                  <input type="text" class="form-control" id="surname" placeholder="Pinkman" required>
+                  <input type="text" name="surname" class="form-control" id="surname" placeholder="Pinkman" required>
                 </div>
                 <div class="col-md-6">
-                  <label for="inputEmail4" class="form-label">Email</label>
-                  <input type="email" class="form-control" id="inputEmail" placeholder="jesse.pinkman@bluesky.com" required>
+                  <label for="email" class="form-label">Email</label>
+                  <input type="email" name="email" class="form-control" id="email" placeholder="jesse.pinkman@bluesky.com" required>
                 </div>
                 <div class="col-md-6">
                   <label for="companyName" class="form-label">Company Name</label>
-                  <input type="text" class="form-control" id="companyName" placeholder="" required>
+                  <input type="text" name="companyName" class="form-control" id="companyName" placeholder="" required>
                 </div>
                 <div class="col-md-6">
-                  <label for="inputPassword" class="form-label">Password</label>
-                  <input type="password" class="form-control" id="inputPassword" required>
+                  <label for="password" class="form-label">Password</label>
+                  <input type="password" name="password" class="form-control" id="password" required>
                 </div>
                 <div class="col-md-6">
                   <label for="confirmPassword" class="form-label">Confirm Password</label>
-                  <input type="password" class="form-control" id="confirmPassword" required>
+                  <input type="password" name="confirmPassword" class="form-control" id="confirmPassword" required>
+                  <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                    Password doesn't match.
+                  </div>
                 </div>
                 <div class="col-12">
-                  <label for="inputAddress" class="form-label">Address</label>
-                  <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St" required>
+                  <label for="address" class="form-label">Address</label>
+                  <input type="text" name="address" class="form-control" id="address">
                 </div>
                 <div class="col-md-6">
-                  <label for="inputCity" class="form-label">City</label>
-                  <input type="text" class="form-control" id="inputCity">
+                  <label for="city" class="form-label">City</label>
+                  <input type="text" name="city" class="form-control" id="city">
                 </div>
                 <div class="col-md-4">
-                  <label for="inputState" class="form-label">State</label>
-                  <select id="inputState" class="form-select">
+                  <label for="state" class="form-label">State</label>
+                  <select id="state" name="state" class="form-select">
                     <option selected required>Choose...</option>
                     <option>Italy</option>
                     <option>Germany</option>
@@ -75,15 +78,33 @@
                   <input type="text" class="form-control" id="inputZip">
                 </div>
                 <div class="col-12">
-                  <button type="submit" class="btn btn-primary">Sign in</button>
+                  <button type="submit" name="submit" class="btn btn-primary" id="submit">Sign in</button>
                 </div>
             </form>
         </div>
     </div>
 
-
+    <div id="thirdContainer">
+        <div id="thirdBackgroundImage"></div>
+        <div id="secondFormContainer">
+            <form class="row g-3 needs-validation" novalidate>
+                <div class="col-md-12">
+                  <label for="loginEmail" class="form-label">Email</label>
+                  <input type="email" class="form-control" id="loginEmail" required>
+                </div>
+                <div class="col-md-15">
+                  <label for="loginPassword" class="form-label">Password</label>
+                  <input type="password" class="form-control" id="loginPassword" required>
+                </div>
+                <div class="col-15">
+                  <button type="submit" class="btn btn-primary">Log in</button>
+                </div>
+            </form>
+        </div>
+    </div>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" async defer></script>
         <script src="homepage.js" async defer></script>
     </body>
 </html>
+
