@@ -1,6 +1,12 @@
+<?php
+session_start();
+if (!isset($_SESSION['status']) || $_SESSION['status'] !== 'success') {
+    header("location: homepage.php");
+    die();
+}
+?>
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">

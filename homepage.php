@@ -27,7 +27,7 @@
     <div id="secondContainer">
         <div id="secondBackgroundImage"></div>
         <div id="formContainer">
-            <form action="formHandler.php" method="post" class="row g-3 has-validation" id="form">
+            <form action="registrationForm.php" method="post" class="row g-3 has-validation" id="form">
                 <div class="col-md-6">
                   <label for="name" class="form-label">Name</label>
                   <input type="text" name="name" class="form-control" id="name" placeholder="Jesse" required>
@@ -87,7 +87,7 @@
     <div id="thirdContainer">
         <div id="thirdBackgroundImage"></div>
         <div id="secondFormContainer">
-            <form class="row g-3 needs-validation" novalidate>
+            <form action="login.php" method="post" class="row g-3 needs-validation" novalidate>
                 <div class="col-md-12">
                   <label for="loginEmail" class="form-label">Email</label>
                   <input type="email" class="form-control" id="loginEmail" required>
