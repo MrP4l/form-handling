@@ -19,7 +19,6 @@ function checkInput($input) {
     $input = trim($input);
     $input = stripslashes($input);
     $input = htmlspecialchars($input);
-
     return $input;
 }
 
@@ -121,73 +120,36 @@ $data = [
     "zip" => $zip
 ];
 
-$save = save_data($data);
+require_once('config.php');
 
-if($save[0]) {
+try {
+    $stmt = $connection->prepare("SELECT COUNT(*) FROM company_data WHERE email = :email");
+    $stmt->bindParam(":email", $data['email'], PDO::PARAM_STR);
+    $stmt->execute();
+    $count = $stmt->fetchColumn();
+    if ($count > 0) {
+        return [false, "account already exists", ""];
+    }
+    $stmt = $connection->prepare("INSERT INTO company_data (name, surname, email, companyName, password, address, city, state, zip) values (:name, :surname, :email, :companyName, :hashedPassword, :address, :city, :state, :zip)");
+    $stmt->bindParam(":name", $data['name'], PDO::PARAM_STR);
+    $stmt->bindParam(":surname", $data['surname'], PDO::PARAM_STR);
+    $stmt->bindParam(":email", $data['email'], PDO::PARAM_STR);
+    $stmt->bindParam(":companyName", $data['companyName'], PDO::PARAM_STR);
+    $stmt->bindParam(":hashedPassword", $data['password'], PDO::PARAM_STR);
+    $stmt->bindParam(":address", $data['address'], PDO::PARAM_STR);
+    $stmt->bindParam(":city", $data['city'], PDO::PARAM_STR);
+    $stmt->bindParam(":state", $data['state'], PDO::PARAM_STR);
+    $stmt->bindParam(":zip", $data['zip'], PDO::PARAM_INT);
+    $stmt->execute();
     //$_SESSION['status'] = 'success';
     //$_SESSION['data'] = $data;
     header('Location:homepage.php');
-    die();
-} else {
-    //$_SESSION['status'] = 'error';
-    //$_SESSION['errors'] = [$save[1]];
-    header('Location:homepage.php');
-    die();
-}
-
-function save_data($data) {
-
-    $servername = "localhost";
-    $username = "root";
-    $pass = "root";
-    $dbname = "company_website";
-
-    try {
-        $connection = new PDO("mysql:host=$servername;dbname=$dbname", $username, $pass);
-    } catch (PDOException $connect_error) {
-        return [false, "error connecting to database", $connect_error->getMessage()];
-    }
-
-    $sql = "CREATE TABLE if not exists `company_data` (
-        `id` INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-        `name` VARCHAR(30),
-        `surname` VARCHAR(30),
-        `email` VARCHAR(30),
-        `companyName` VARCHAR(50),
-        `password` VARCHAR(100),
-        `address` VARCHAR(50),
-        `city` VARCHAR(20),
-        `state` VARCHAR(20),
-        `zip` INT(5)
-    )";
-
-    $connection->exec($sql);
-
-    try {
-        $stmt = $connection->prepare("SELECT COUNT(*) FROM company_data WHERE email = :email");
-        $stmt->bindParam(":email", $data['email'], PDO::PARAM_STR);
-        $stmt->execute();
-        $count = $stmt->fetchColumn();
-    
-        if ($count > 0) {
-            return [false, "account already exists", ""];
-        }
-
-        $stmt = $connection->prepare("INSERT INTO company_data (name, surname, email, companyName, password, address, city, state, zip) values (:name, :surname, :email, :companyName, :hashedPassword, :address, :city, :state, :zip)");
-
-        $stmt->bindParam(":name", $data['name'], PDO::PARAM_STR);
-        $stmt->bindParam(":surname", $data['surname'], PDO::PARAM_STR);
-        $stmt->bindParam(":email", $data['email'], PDO::PARAM_STR);
-        $stmt->bindParam(":companyName", $data['companyName'], PDO::PARAM_STR);
-        $stmt->bindParam(":hashedPassword", $data['password'], PDO::PARAM_STR);
-        $stmt->bindParam(":address", $data['address'], PDO::PARAM_STR);
-        $stmt->bindParam(":city", $data['city'], PDO::PARAM_STR);
-        $stmt->bindParam(":state", $data['state'], PDO::PARAM_STR);
-        $stmt->bindParam(":zip", $data['zip'], PDO::PARAM_INT);
-
-        $stmt->execute();
-    } catch (PDOException $e) {
-        return [false, "error saving data", $e->getMessage()];
-    }
     return [true, "data saved", ""];
+} catch (PDOException $e) {
+    //$_SESSION['status'] = 'error';
+    //$_SESSION['errors'] = true;
+    header('Location:homepage.php');
+    return [false, "error saving data", $e->getMessage()];
 }
+
+

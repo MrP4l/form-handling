@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (!isset($_SESSION['status']) || $_SESSION['status'] !== 'success') {
+if ($_SESSION['status'] !== 'success') {
     header("location: homepage.php");
     die();
 }
@@ -53,7 +53,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] !== 'success') {
 
     <div id="bodyContainer" class="bg-black bg-gradient">
         <div id="textContainer">
-            <h1 id="text" class="display-4 text-light">Wewewe</h1>
+            <h1 id="text" class="display-4 text-light">Welcome <?php echo($_SESSION['companyName']) ?></h1>
         </div>
     </div>
 

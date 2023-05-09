@@ -38,11 +38,11 @@
                 </div>
                 <div class="col-md-6">
                   <label for="email" class="form-label">Email</label>
-                  <input type="email" name="email" class="form-control" id="email" placeholder="jesse.pinkman@bluesky.com" required>
+                  <input type="email" name="email" class="form-control" id="email" required>
                 </div>
                 <div class="col-md-6">
                   <label for="companyName" class="form-label">Company Name</label>
-                  <input type="text" name="companyName" class="form-control" id="companyName" placeholder="" required>
+                  <input type="text" name="companyName" class="form-control" id="companyName" required>
                 </div>
                 <div class="col-md-6">
                   <label for="password" class="form-label">Password</label>
@@ -87,14 +87,14 @@
     <div id="thirdContainer">
         <div id="thirdBackgroundImage"></div>
         <div id="secondFormContainer">
-            <form action="login.php" method="post" class="row g-3 needs-validation" novalidate>
+            <form action="login.php" method="post" class="row g-3 needs-validation">
                 <div class="col-md-12">
-                  <label for="loginEmail" class="form-label">Email</label>
-                  <input type="email" class="form-control" id="loginEmail" required>
+                  <label for="email" class="form-label">Email</label>
+                  <input type="email" name="email" class="form-control" id="email" required>
                 </div>
                 <div class="col-md-15">
-                  <label for="loginPassword" class="form-label">Password</label>
-                  <input type="password" class="form-control" id="loginPassword" required>
+                  <label for="password" class="form-label">Password</label>
+                  <input type="password" name="password" class="form-control" id="password" required>
                 </div>
                 <div class="col-15">
                   <button type="submit" class="btn btn-primary">Log in</button>
