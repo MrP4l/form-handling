@@ -1,7 +1,7 @@
 <?php
 session_start();
 if ($_SESSION['status'] !== 'success') {
-    header("location: index.php");
+    header("location: index.html");
     die();
 }
 ?>

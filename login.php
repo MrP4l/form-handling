@@ -43,18 +43,18 @@ try {
             return [true, "Login successful", $user];
         } else {
             $_SESSION['status'] = 'error'; 
-            header('Location:index.php');
+            header('Location:index.html');
             return [false, "Invalid email or password", null];
         }
     } else {
         var_dump($_SESSION['status'] = 'error');
-        header('Location:index.php');
+        header('Location:index.html');
         return [false, "Invalid email or password", null];
     }
 } catch (PDOException $e) {
     $_SESSION['status'] = 'error';
     $_SESSION['errors'] = true;
-    header('Location:index.php');
+    header('Location:index.html');
     return [false, "Error saving data", $e->getMessage()];
 }
 ?>

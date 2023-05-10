@@ -143,12 +143,12 @@ try {
     $stmt->execute();
     $_SESSION['status'] = 'success';
     $_SESSION['data'] = $data;
-    header('Location:index.php');
+    header('Location:index.html');
     return [true, "Data saved", ""];
 } catch (PDOException $e) {
     $_SESSION['status'] = 'error';
     $_SESSION['errors'] = true;
-    header('Location:index.php');
+    header('Location:index.html');
     return [false, "Error saving data", $e->getMessage()];
 }
 
