@@ -1,7 +1,7 @@
 <?php
 session_start();
 if ($_SESSION['status'] !== 'success') {
-    header("location: homepage.php");
+    header("location: index.php");
     die();
 }
 ?>
@@ -18,7 +18,6 @@ if ($_SESSION['status'] !== 'success') {
 </head>
 
 <body>
-
     <nav class="navbar navbar-expand-lg" class="fixed-top">
         <div class="container-fluid">
             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-tree" viewBox="0 0 16 16">
@@ -41,7 +40,7 @@ if ($_SESSION['status'] !== 'success') {
                 </ul>
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Logout</a>
+                        <a class="nav-link" href="logout.php">Logout</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Settings</a>
@@ -53,7 +52,7 @@ if ($_SESSION['status'] !== 'success') {
 
     <div id="bodyContainer" class="bg-black bg-gradient">
         <div id="textContainer">
-            <h1 id="text" class="display-4 text-light">Welcome <?php echo($_SESSION['companyName']) ?></h1>
+            <h1 id="text" class="display-4 text-light">Welcome, <?php echo($_SESSION['companyName']) ?></h1>
         </div>
     </div>
 

@@ -1,6 +1,6 @@
 <?php
 
-require_once('config.php');
+require_once('config/config.php');
 
 $email = "";
 $password = "";
@@ -40,21 +40,21 @@ try {
             $_SESSION['companyName'] = $user['companyName'];
             $_SESSION['status'] = 'success';
             header('Location:privateArea.php');
-            return [true, "login successful", $user];
+            return [true, "Login successful", $user];
         } else {
             $_SESSION['status'] = 'error'; 
-            header('Location:homepage.php');
-            return [false, "invalid email or password", null];
+            header('Location:index.php');
+            return [false, "Invalid email or password", null];
         }
     } else {
         var_dump($_SESSION['status'] = 'error');
-        header('Location:homepage.php');
-        return [false, "invalid email or password", null];
+        header('Location:index.php');
+        return [false, "Invalid email or password", null];
     }
 } catch (PDOException $e) {
     $_SESSION['status'] = 'error';
     $_SESSION['errors'] = true;
-    header('Location:homepage.php');
-    return [false, "error saving data", $e->getMessage()];
+    header('Location:index.php');
+    return [false, "Error saving data", $e->getMessage()];
 }
 ?>

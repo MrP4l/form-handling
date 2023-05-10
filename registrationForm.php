@@ -120,7 +120,7 @@ $data = [
     "zip" => $zip
 ];
 
-require_once('config.php');
+require_once('config/config.php');
 
 try {
     $stmt = $connection->prepare("SELECT COUNT(*) FROM company_data WHERE email = :email");
@@ -141,15 +141,15 @@ try {
     $stmt->bindParam(":state", $data['state'], PDO::PARAM_STR);
     $stmt->bindParam(":zip", $data['zip'], PDO::PARAM_INT);
     $stmt->execute();
-    //$_SESSION['status'] = 'success';
-    //$_SESSION['data'] = $data;
-    header('Location:homepage.php');
-    return [true, "data saved", ""];
+    $_SESSION['status'] = 'success';
+    $_SESSION['data'] = $data;
+    header('Location:index.php');
+    return [true, "Data saved", ""];
 } catch (PDOException $e) {
-    //$_SESSION['status'] = 'error';
-    //$_SESSION['errors'] = true;
-    header('Location:homepage.php');
-    return [false, "error saving data", $e->getMessage()];
+    $_SESSION['status'] = 'error';
+    $_SESSION['errors'] = true;
+    header('Location:index.php');
+    return [false, "Error saving data", $e->getMessage()];
 }
 
 

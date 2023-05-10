@@ -7,7 +7,7 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-        <link rel="stylesheet" href="homepage.css">
+        <link rel="stylesheet" href="index.css">
     </head>
     <body>
     
@@ -31,41 +31,53 @@
                 <div class="col-md-6">
                   <label for="name" class="form-label">Name</label>
                   <input type="text" name="name" class="form-control" id="name" placeholder="Jesse" required>
+                  <div class="invalid-feedback">
+                    Insert your name.
+                  </div>
                 </div>
                 <div class="col-md-6">
                   <label for="surname" class="form-label">Surname</label>
                   <input type="text" name="surname" class="form-control" id="surname" placeholder="Pinkman" required>
+                  <div class="invalid-feedback">
+                    Insert your surname.
+                  </div>
                 </div>
                 <div class="col-md-6">
                   <label for="email" class="form-label">Email</label>
-                  <input type="email" name="email" class="form-control" id="email" required>
+                  <input type="email" name="email" class="form-control" id="email" required disabled>
+                  <div class="invalid-feedback">
+                    Insert a valid email.
+                  </div>
                 </div>
                 <div class="col-md-6">
                   <label for="companyName" class="form-label">Company Name</label>
-                  <input type="text" name="companyName" class="form-control" id="companyName" required>
+                  <input type="text" name="companyName" class="form-control" id="companyName" required disabled>
                 </div>
                 <div class="col-md-6">
                   <label for="password" class="form-label">Password</label>
-                  <input type="password" name="password" class="form-control" id="password" required>
+                  <input type="password" name="password" class="form-control" id="password" required disabled>
+                  <div class="invalid-feedback">
+                   Password must be between 8 and 25 characters long.
+                  </div>
                 </div>
                 <div class="col-md-6">
                   <label for="confirmPassword" class="form-label">Confirm Password</label>
-                  <input type="password" name="confirmPassword" class="form-control" id="confirmPassword" required>
-                  <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                  <input type="password" name="confirmPassword" class="form-control" id="confirmPassword" required disabled>
+                  <div class="invalid-feedback">
                     Password doesn't match.
                   </div>
                 </div>
                 <div class="col-12">
                   <label for="address" class="form-label">Address</label>
-                  <input type="text" name="address" class="form-control" id="address">
+                  <input type="text" name="address" class="form-control" id="address" disabled>
                 </div>
                 <div class="col-md-6">
                   <label for="city" class="form-label">City</label>
-                  <input type="text" name="city" class="form-control" id="city">
+                  <input type="text" name="city" class="form-control" id="city" disabled>
                 </div>
                 <div class="col-md-4">
                   <label for="state" class="form-label">State</label>
-                  <select id="state" name="state" class="form-select">
+                  <select id="state" name="state" class="form-select" disabled>
                     <option selected required>Choose...</option>
                     <option>Italy</option>
                     <option>Germany</option>
@@ -74,8 +86,8 @@
                   </select>
                 </div>
                 <div class="col-md-2">
-                  <label for="inputZip" class="form-label">Zip</label>
-                  <input type="text" class="form-control" id="inputZip">
+                  <label for="zip" class="form-label">Zip</label>
+                  <input type="text" name="zip" class="form-control" id="zip" disabled>
                 </div>
                 <div class="col-12">
                   <button type="submit" name="submit" class="btn btn-primary" id="submit">Sign in</button>
@@ -104,7 +116,7 @@
     </div>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" async defer></script>
-        <script src="homepage.js" async defer></script>
+        <script src="index.js" async defer></script>
     </body>
 </html>
 
