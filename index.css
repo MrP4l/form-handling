@@ -2,6 +2,12 @@ html {
     scroll-behavior: smooth;
   }
 
+#content {
+    display: flex;
+    flex-wrap: wrap;
+    height: fit-content;
+    width: 100vw;
+}
 #firstContainer {
     display: flex;
     justify-content: center;
@@ -124,8 +130,10 @@ html {
 #secondFormContainer {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
     height: fit-content;
-    width: 30%;
+    width: fit-content;
     padding: 20px;
     border-radius: 30px;
     color: white;

@@ -14,6 +14,9 @@ $zip = "";
 // Validations
 $errors = [];
 $data = [];
+$message = "";
+$required = false;
+$wrongData = false;
 
 function checkInput($input) {
     $input = trim($input);
@@ -31,6 +34,7 @@ if (isset($_POST["submit"])) {
         }
     } else {
         $errors[] = "name field cannot be empty";
+        $required = true;
     }
 
     // 2. Surname - required, alphabets and spaces only
@@ -41,6 +45,7 @@ if (isset($_POST["submit"])) {
         }
     } else {
         $errors[] = "Surname field cannot be empty";
+        $required = true;
     }
 
     // 3. Email - required and correct pattern
@@ -51,6 +56,7 @@ if (isset($_POST["submit"])) {
         }
     } else {
         $errors[] = "Email can't be empty";
+        $required = true;
     }
 
     // 4. Company Name - required
@@ -58,6 +64,7 @@ if (isset($_POST["submit"])) {
         $companyName = checkInput($_POST['companyName']);
     } else {
         $errors[] = "Company name field is required";
+        $required = true;
     }
 
     // 5. Password - add the hashing
@@ -66,6 +73,7 @@ if (isset($_POST["submit"])) {
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
     } else {
         $errors[] = "Password is required";
+        $required = true;
     }
 
     // 6. Confirm Password - add the hashing
@@ -78,8 +86,9 @@ if (isset($_POST["submit"])) {
         }
     } else {
         $errors[] = "Rewrite your password";
+        $required = true;
     }
-        
+
     // 7. Address
     if (isset($_POST['address'])) {
         $address = checkInput($_POST['address']);
@@ -108,48 +117,54 @@ if (isset($_POST["submit"])) {
     }
 }
 
-$data = [
-    "name" => $name,
-    "surname" => $surname,
-    "email" => $email,
-    "companyName" => $companyName,
-    "password" => $hashedPassword,
-    "address" => $address,
-    "city" => $city,
-    "state" => $state,
-    "zip" => $zip
-];
+if ($required == false) {
+    $data = [
+        "name" => $name,
+        "surname" => $surname,
+        "email" => $email,
+        "companyName" => $companyName,
+        "password" => $hashedPassword,
+        "address" => $address,
+        "city" => $city,
+        "state" => $state,
+        "zip" => $zip
+    ];
 
-require_once('config/config.php');
+    require_once('config/config.php');
 
-try {
-    $stmt = $connection->prepare("SELECT COUNT(*) FROM company_data WHERE email = :email");
-    $stmt->bindParam(":email", $data['email'], PDO::PARAM_STR);
-    $stmt->execute();
-    $count = $stmt->fetchColumn();
-    if ($count > 0) {
-        return [false, "account already exists", ""];
+    try {
+        $stmt = $connection->prepare("SELECT COUNT(*) FROM company_data WHERE email = :email");
+        $stmt->bindParam(":email", $data['email'], PDO::PARAM_STR);
+        $stmt->execute();
+        $count = $stmt->fetchColumn();
+        if ($count > 0) {
+            $errors[] = "Account already exists";
+        }
+        $stmt = $connection->prepare("INSERT INTO company_data (name, surname, email, companyName, password, address, city, state, zip) values (:name, :surname, :email, :companyName, :hashedPassword, :address, :city, :state, :zip)");
+        $stmt->bindParam(":name", $data['name'], PDO::PARAM_STR);
+        $stmt->bindParam(":surname", $data['surname'], PDO::PARAM_STR);
+        $stmt->bindParam(":email", $data['email'], PDO::PARAM_STR);
+        $stmt->bindParam(":companyName", $data['companyName'], PDO::PARAM_STR);
+        $stmt->bindParam(":hashedPassword", $data['password'], PDO::PARAM_STR);
+        $stmt->bindParam(":address", $data['address'], PDO::PARAM_STR);
+        $stmt->bindParam(":city", $data['city'], PDO::PARAM_STR);
+        $stmt->bindParam(":state", $data['state'], PDO::PARAM_STR);
+        $stmt->bindParam(":zip", $data['zip'], PDO::PARAM_INT);
+        $stmt->execute();
+        $message = "Data saved";
+        $_SESSION['status'] = 'success';
+        $_SESSION['data'] = $data;
+        $_SESSION['message'] = $message;
+        $_SESSION['errors'] = $errors;
+        header('Location:index.html');
+        die();
+    } catch (PDOException $e) {
+        $_SESSION['status'] = 'error';
+        $_SESSION['errors'] = true;
+        header('Location:index.html');
+        return [false, "Error saving data", $e->getMessage()];
     }
-    $stmt = $connection->prepare("INSERT INTO company_data (name, surname, email, companyName, password, address, city, state, zip) values (:name, :surname, :email, :companyName, :hashedPassword, :address, :city, :state, :zip)");
-    $stmt->bindParam(":name", $data['name'], PDO::PARAM_STR);
-    $stmt->bindParam(":surname", $data['surname'], PDO::PARAM_STR);
-    $stmt->bindParam(":email", $data['email'], PDO::PARAM_STR);
-    $stmt->bindParam(":companyName", $data['companyName'], PDO::PARAM_STR);
-    $stmt->bindParam(":hashedPassword", $data['password'], PDO::PARAM_STR);
-    $stmt->bindParam(":address", $data['address'], PDO::PARAM_STR);
-    $stmt->bindParam(":city", $data['city'], PDO::PARAM_STR);
-    $stmt->bindParam(":state", $data['state'], PDO::PARAM_STR);
-    $stmt->bindParam(":zip", $data['zip'], PDO::PARAM_INT);
-    $stmt->execute();
-    $_SESSION['status'] = 'success';
-    $_SESSION['data'] = $data;
-    header('Location:index.html');
-    return [true, "Data saved", ""];
-} catch (PDOException $e) {
-    $_SESSION['status'] = 'error';
-    $_SESSION['errors'] = true;
-    header('Location:index.html');
-    return [false, "Error saving data", $e->getMessage()];
+} else {
+    $errors[] = "Error saving data";
+    $_SESSION['errors'] = $errors;
 }
-
-

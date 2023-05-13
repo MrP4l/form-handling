@@ -1,4 +1,4 @@
-(() => {
+(function smoothScroll() {
     const joinUsButton = document.getElementById("joinUsButton");
     const secondContainer = document.getElementById("secondContainer");
     joinUsButton.addEventListener("click", () => {
@@ -15,7 +15,7 @@
     });
 })();
 
-(() => {
+(function savePlaceholder() {
     const inputs = document.querySelectorAll(".form-control");
     for (let input of inputs) {
         input.addEventListener("focus", () => {
@@ -28,7 +28,7 @@
     }
 })();
 
-(() => {
+(function nameValidation() {
     const name = document.getElementById("name");
     name.addEventListener("blur", () => {
         if (name.value === "") {
@@ -39,7 +39,7 @@
     })
 })();
 
-(() => {
+(function surnameValidation() {
     const surname = document.getElementById("surname");
     surname.addEventListener("blur", () => {
         if (surname.value === "") {
@@ -50,7 +50,7 @@
     })
 })();
 
-(() => {
+(function emailValidation() {
     const email = document.getElementById("email");
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     email.addEventListener("blur", () => {
@@ -62,7 +62,7 @@
     })
 })();
 
-(() => {
+(function passwordValidation() {
     const password = document.getElementById("password");
     password.addEventListener("input", () => {
         if (password.value.length < 8 || password.value.length > 25) {
@@ -73,7 +73,7 @@
     })
 })();
 
-(() => {
+(function confirmPasswordValidiation() {
     const password = document.getElementById("password");
     const confirmPassword = document.getElementById("confirmPassword");
     confirmPassword.addEventListener("input", () => {
@@ -85,7 +85,7 @@
     })
 })();
 
-(() => {
+(function activeFields() {
     const name = document.getElementById("name");
     const surname = document.getElementById("surname");
     const email = document.getElementById("email");
@@ -134,7 +134,7 @@
     })
 })();
 
-(() => {
+(function preventDefault() {
     const form = document.getElementById("form");
     const password = document.getElementById("password");
     const confirmPassword = document.getElementById("confirmPassword");

@@ -4,6 +4,8 @@ require_once('config/config.php');
 
 $email = "";
 $password = "";
+$message = "";
+$errors = [];
 
 if (isset($_POST['email'])) {
     $email = checkInput($_POST['email']);
@@ -31,7 +33,6 @@ try {
     $stmt = $connection->prepare("SELECT * FROM company_data WHERE email = :email");
     $stmt->bindParam(":email", $email, PDO::PARAM_STR);
     $stmt->execute();
-
     if ($stmt->rowCount() == 1) {
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
         if (password_verify($password, $user['password'])) {
@@ -39,17 +40,19 @@ try {
             $_SESSION['email'] = $user['email'];
             $_SESSION['companyName'] = $user['companyName'];
             $_SESSION['status'] = 'success';
+            $message = "Login successfull";
             header('Location:privateArea.php');
-            return [true, "Login successful", $user];
+            die();
         } else {
             $_SESSION['status'] = 'error'; 
+            $errors[] = "Invalid email or password";
             header('Location:index.html');
-            return [false, "Invalid email or password", null];
+            die();
         }
     } else {
-        var_dump($_SESSION['status'] = 'error');
+        $errors[] = "Invalid email or password";
         header('Location:index.html');
-        return [false, "Invalid email or password", null];
+        die();
     }
 } catch (PDOException $e) {
     $_SESSION['status'] = 'error';
