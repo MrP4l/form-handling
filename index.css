@@ -22,11 +22,12 @@ html {
 }
 
 #firstBackgroundImage {
-    width: 100%;
-    height: 100%;
+    height: 100vh;
+    width: 100vw;
     position: absolute;
     background-repeat: no-repeat;
     background-size: cover;
+    background-size: 100% 100%;
     z-index: -1;
     background-image: url('images/ronaldo-de-oliveira-qV3-yE6kovQ-unsplash.jpg');
 }
@@ -68,8 +69,8 @@ html {
 }
 
 #secondBackgroundImage {
-    width: 100%;
-    height: 100%;
+    height: 100vh;
+    width: 100vw;
     position: absolute;
     background-repeat: no-repeat;
     background-size: cover;
@@ -123,8 +124,8 @@ html {
 }
 
 #thirdBackgroundImage {
-    width: 100%;
-    height: 100%;
+    height: 100vh;
+    width: 100vw;
     position: absolute;
     background-repeat: no-repeat;
     background-size: cover;
