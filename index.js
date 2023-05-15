@@ -96,6 +96,15 @@
     const city = document.getElementById("city");
     const state = document.getElementById("state");
     const zip = document.getElementById("zip");
+    name.addEventListener("input", () => {
+        if (name.value !== "" && surname.value !== "") {
+            email.removeAttribute("disabled");
+            companyName.removeAttribute("disabled");
+        } else {
+            email.setAttribute("disabled", "disabled");
+            companyName.setAttribute("disabled", "disabled");
+        }
+    })
     surname.addEventListener("input", () => {
         if (name.value !== "" && surname.value !== "") {
             email.removeAttribute("disabled");
@@ -105,6 +114,15 @@
             companyName.setAttribute("disabled", "disabled");
         }
     })
+    email.addEventListener("input", () => {
+        if (email.value !== "" && companyName.value !== "") {
+            password.removeAttribute("disabled");
+            confirmPassword.removeAttribute("disabled");
+        } else {
+            password.setAttribute("disabled", "disabled");
+            confirmPassword.setAttribute("disabled", "disabled");
+        }
+    })
     companyName.addEventListener("input", () => {
         if (email.value !== "" && companyName.value !== "") {
             password.removeAttribute("disabled");
@@ -112,6 +130,13 @@
         } else {
             password.setAttribute("disabled", "disabled");
             confirmPassword.setAttribute("disabled", "disabled");
+        }
+    })
+    password.addEventListener("input", () => {
+        if (password.value !== "" && confirmPassword.value !== "" && password.value === confirmPassword.value) {
+            address.removeAttribute("disabled");
+        } else {
+            address.setAttribute("disabled", "disabled");
         }
     })
     confirmPassword.addEventListener("input", () => {
